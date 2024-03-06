@@ -6,3 +6,20 @@ body,
     margin: 0;
     padding: 0;
 }
+
+/* 改变el-main默认属性值 */
+.content {
+    line-height: 0;
+    text-align: left;
+}
+
+/* 设置卡片视图阴影 */
+.el-card {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* 设置面包屑 */
+.el-breadcrumb {
+    margin-bottom: 15px;
+    font-size: 12px;
+}

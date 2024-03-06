@@ -16,7 +16,7 @@
           <img src="../assets/img/messi2.jpg" />
         </div>
         <!-- 用户名 -->
-        <div class="username">HYKANG</div>
+        <div class="username">{{ managerInfo.username }}</div>
         <!-- 翻转箭头 -->
         <i
           class="el-icon-arrow-down"
@@ -25,25 +25,80 @@
         <!-- 个人信息下拉框 -->
         <transition name="dropdown-content">
           <div class="dropdown-content" v-show="isUnfold">
+            <!-- 基本信息栏 -->
             <div class="basic-information">
+              <!-- 头像 -->
               <div class="headSculpture">
                 <img src="../assets/img/messi2.jpg" />
               </div>
+              <!-- 基本信息 -->
               <div class="basic-information-left">
-                <div class="username">HYKANG</div>
-                <div class="userId">ID:666</div>
+                <div class="username">{{ managerInfo.username }}</div>
+                <div class="userId">ID:{{ managerInfo.id }}</div>
               </div>
             </div>
-            <hr style="background: #fff; margin: 10px" />
-            <!-- 账号信息 -->
-            <div class="account-information"></div>
+            <hr style="color: #2c3e58; margin: 5px" />
+            <!-- 账户信息栏 -->
+            <div class="account-email">
+              <span>Email：</span>
+              <span>{{ managerInfo.email }}</span>
+            </div>
+            <div class="account-phone">
+              <span>Phone：</span>
+              <span>{{ managerInfo.phone }}</span>
+            </div>
+            <div class="account-status">
+              <span>Status：</span>
+              <span>{{ managerInfo.status ? "开启" : "禁用" }}</span>
+            </div>
+            <!-- 退出按钮 -->
+            <el-button class="logout" @click="logout">退出</el-button>
           </div>
         </transition>
       </div>
     </el-header>
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside :width="isCollapse ? '64px' : '200px'">Aside</el-aside>
+      <el-aside :width="isCollapse ? '64px' : '200px'">
+        <div class="toggle-button" @click="toggleCollapse">|||</div>
+        <el-menu
+          class="el-menu"
+          background-color="#BBE6D6"
+          text-color="#2C3E58"
+          active-text-color="#70CCA2"
+          :unique-opened="true"
+          :collapse="isCollapse"
+          :collapse-transition="false"
+          :router="true"
+          :default-active="activePath"
+        >
+          <!-- 一级菜单循环 -->
+          <el-submenu
+            :index="item.permissionId + ''"
+            v-for="item in menulist"
+            :key="item.permissionId"
+          >
+            <!-- 一级菜单模版 -->
+            <template slot="title">
+              <i :class="iconArr[item.permissionId]"></i>
+              <span>{{ item.name }}</span>
+            </template>
+            <!-- 二级菜单循环 -->
+            <el-menu-item
+              :index="'/' + subItem.apiPath"
+              v-for="subItem in item.children"
+              :key="subItem.permissionId"
+              @click="saveNavState('/' + subItem.apiPath)"
+            >
+              <!-- 二级菜单模版 -->
+              <template slot="title">
+                <i class="el-icon-menu"></i>
+                <span>{{ subItem.name }}</span>
+              </template>
+            </el-menu-item>
+          </el-submenu>
+        </el-menu>
+      </el-aside>
       <!-- 内容栏 -->
       <el-main>
         <!-- 路由占位符：路由到指定组件 -->
@@ -58,16 +113,55 @@ export default {
   name: "Home",
   data() {
     return {
+      menulist: [], // 左侧菜单
+      iconArr: {
+        125: "iconfont icon-user",
+        103: "iconfont icon-tijikongjian",
+        101: "iconfont icon-shangpin",
+        102: "iconfont icon-danju",
+        145: "iconfont icon-baobiao",
+      },
+      managerInfo: {}, //管理员信息
       isCollapse: false, //控制选项栏收起与展示
       isUnfold: false, //控制个人信息弹窗展开和收起
-      arrow: true,
+      arrow: true, //控制箭头翻转
+      activePath: "", //保存激活路由
     };
+  },
+  created() {
+    this.getMenuList();
+    this.managerInfo = this.$store.state.managerInfo;
+    this.activePath = this.$store.state.activePath;
   },
   methods: {
     // 触发个人信息展开和收起
     openTap() {
       this.isUnfold = !this.isUnfold;
       this.arrow = !this.arrow;
+    },
+    // 获取菜单数据
+    async getMenuList() {
+      const { data: res } = await this.$http.get("/rights/getMenus");
+      if (res.code !== 200) {
+        return this.$message.error("获取菜单数据失败！");
+      }
+      this.menulist = res.data;
+      console.log(res);
+    },
+    // 触发菜单展开收起
+    toggleCollapse() {
+      this.isCollapse = !this.isCollapse;
+    },
+    // 保存激活路径
+    saveNavState(path) {
+      this.$store.commit("updateActivePath", path);
+      this.activePath = path;
+    },
+    // 退出登录
+    logout() {
+      /* 清除缓存数据、重置Vuex中的数据，并路由到登录页 */
+      this.$store.dispatch("resetVuex");
+      this.$router.push("/login");
     },
   },
 };
@@ -129,6 +223,7 @@ export default {
   cursor: pointer;
   position: relative;
   z-index: 0;
+  background: #c8ebdf;
 }
 .headSculpture {
   width: 60px;
@@ -155,7 +250,7 @@ export default {
   transition: all 0.6s;
 }
 .header-left > .username {
-  color: #fff;
+  color: #2c3e58;
   margin: 0 5px;
 }
 .el-icon-arrow-down {
@@ -178,7 +273,9 @@ export default {
 .dropdown-content {
   width: 100%;
   height: 200px;
-  border-radius: 3%;
+  // 父级设置：目的时退出按钮能沾满剩余盒子
+  display: flex; //将对象作为弹性伸缩盒显示
+  flex-flow: column; //方向设置为垂直方向
   background: #c8ebdf;
   position: absolute;
   top: 100%;
@@ -203,7 +300,7 @@ export default {
   width: 100%;
   height: 60px;
   display: flex;
-  background: #fff;
+  // background: #fff;
 }
 .basic-information > .headSculpture img {
   width: 50px;
@@ -212,20 +309,46 @@ export default {
 .basic-information-left {
   width: calc(100%-60px);
   height: 100%;
+  font-size: 13px;
   align-items: center;
-  color: white;
+  color: #2c3e58;
 }
 .userId,
 .basic-information-left > .username {
   width: 100%;
   height: 30px;
-  background: #70cca2;
-}
-.userId {
-  font-size: 13px;
+  // background: #fff;
 }
 .basic-information-left > .username {
-  font-size: 15px;
   line-height: 30px;
+}
+.toggle-button {
+  width: 100%;
+  height: 30px;
+  background: #70cca2;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  cursor: pointer;
+  letter-spacing: 3px;
+}
+.iconfont {
+  margin-right: 10px;
+}
+.account-email,
+.account-phone,
+.account-status {
+  width: 100%;
+  height: 25px;
+  line-height: 25px;
+  color: #2c3e58;
+  font-size: 10px;
+}
+.logout {
+  width: 100%;
+  flex: 1; //子级设置占比：按占比分配非设置固定值的空间
+  letter-spacing: 10px;
+  background-color: #70cca2;
+  color: #fff;
 }
 </style>

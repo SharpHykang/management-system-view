@@ -79,14 +79,30 @@ export default {
   methods: {
     // 登录
     submitForm() {
-      this.$refs["loginFormRef"].validate((valid) => {
-        if (valid) {
-          this.$router.push("/home");
-          this.$message.success("验证成功！");
-        } else {
-          this.$message.error("验证失败！");
+      this.$refs["loginFormRef"].validate(async (valid) => {
+        if (!valid) {
+          return;
         }
+        const { data: res } = await this.$http.post(
+          "managers/login",
+          this.loginForm
+        );
+        // console.log(res);
+        if (res.code !== 200) {
+          return this.$message.error(res.msg);
+        }
+        this.$message.success(res.msg);
+        // 通过触发mutation修改state中的值
+        this.$store.commit("updateToken", res.data.token);
+        this.$store.commit("updateManagerId", res.data.id);
+        this.findManagerById();
+        this.$router.push("/home");
       });
+    },
+    // 登录成功获取管理员信息
+    findManagerById() {
+      // 触发action(必须调用dispatch方法)
+      this.$store.dispatch("findManagerById");
     },
     // 重置
     resetForm() {
