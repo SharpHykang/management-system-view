@@ -91,18 +91,25 @@ export default {
         if (res.code !== 200) {
           return this.$message.error(res.msg);
         }
-        this.$message.success(res.msg);
+        this.$message.success("登录成功！");
         // 通过触发mutation修改state中的值
         this.$store.commit("updateToken", res.data.token);
         this.$store.commit("updateManagerId", res.data.id);
         this.findManagerById();
-        this.$router.push("/home");
       });
     },
     // 登录成功获取管理员信息
     findManagerById() {
       // 触发action(必须调用dispatch方法)
-      this.$store.dispatch("findManagerById");
+      this.$store
+        .dispatch("findManagerById")
+        .then((res) => {
+          // findManagerById异步执行完后的回调：此时数据已存入Vuex，跳转就能渲染
+          this.$router.push("/home");
+        })
+        .catch((err) => {
+          this.$message.err(err);
+        });
     },
     // 重置
     resetForm() {

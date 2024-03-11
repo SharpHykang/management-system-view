@@ -23,3 +23,37 @@ body,
     margin-bottom: 15px;
     font-size: 12px;
 }
+
+
+/* 取消某些组件属性，以免覆盖下拉框组件 */
+/* .el-row,
+.el-input-group--append,
+.el-input-group__append {
+    position: unset;
+} */
+
+.el-table {
+    margin-top: 10px;
+}
+
+/* 添加按钮样式 */
+.button-add {
+    background: #70cca2;
+    color: #fff;
+}
+
+/* 取消表格下面所有相对定位属性 */
+/* .table-custom * {
+    position: unset !important;
+} */
+
+.el-pagination {
+    margin-top: 10px;
+    text-align: left;
+}
+
+/* 改变el-main默认属性值 */
+.content {
+    line-height: 0;
+    text-align: left;
+}

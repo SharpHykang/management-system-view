@@ -53,24 +53,31 @@ const store = new Vuex.Store({
       state.activePath="";
       state.managerInfo={};
       window.sessionStorage.clear();
+    },
+    clearActivePath(state){
+      state.activePath=""
+      window.sessionStorage.setItem("activePath","");
     }
   },
 
   // 用于定义异步操作的动作（函数）
   actions: {
     // 定义获取管理员数据的action，用于查询接口数据
-    async findManagerById(context) {
-      const { data: res } = await axios.get(
-        `managers/findManagerById/${context.state.managerId}`
-      );
-      console.log(res);
-      if (res.code !== 200) {
-        return this.$message.error("获取管理员信息失败！");
-      }
-      // 必须触发mutation修改值
-      // context类似于this.$store
-      context.commit('findManagerById', res.data)
+     findManagerById(context) {
+      return axios.get(`managers/findManagerById/${context.state.managerId}`)
+      .then(data => {
+        const { data:res } = data;
+        if(res.code!==200){
+          // 在vuex的Actions中，this指向Vuex实例。在this下有一个this._vm，它就是Vue实例
+          return this._vm.$message.error("获取管理员信息失败！");
+        }
+        // 必须触发mutation修改值
+        // context类似于this.$store
+        context.commit('findManagerById', res.data)
+        return data;
+      })
     },
+    // 重置Vuex数据
     resetVuex(context) {
       context.commit("resetVuex")
     },

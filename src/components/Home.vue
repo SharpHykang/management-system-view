@@ -5,7 +5,15 @@
     <el-header>
       <!-- 头部栏右边 -->
       <div class="header-right">
-        <span>拼夕夕</span>
+        <!-- 注意：捕获当前路由 路由到当前路由的错误信息！！！ -->
+        <span
+          @click="
+            $router.push('/home').catch((err) => {
+              $message.error(err);
+            })
+          "
+          >狗多多</span
+        >
         <span>|</span>
         <span>后台管理系统</span>
       </div>
@@ -26,10 +34,17 @@
         <transition name="dropdown-content">
           <div class="dropdown-content" v-show="isUnfold">
             <!-- 基本信息栏 -->
-            <div class="basic-information">
+            <div
+              class="basic-information"
+              @click="
+                $router.push('/home').catch((err) => {
+                  $message.error(err);
+                })
+              "
+            >
               <!-- 头像 -->
               <div class="headSculpture">
-                <img src="../assets/img/messi2.jpg" />
+                <img src="../assets/img/ikun.jpg" />
               </div>
               <!-- 基本信息 -->
               <div class="basic-information-left">
@@ -70,7 +85,7 @@
           :collapse="isCollapse"
           :collapse-transition="false"
           :router="true"
-          :default-active="activePath"
+          :default-active="$store.state.activePath"
         >
           <!-- 一级菜单循环 -->
           <el-submenu
@@ -122,16 +137,14 @@ export default {
         145: "iconfont icon-baobiao",
       },
       managerInfo: {}, //管理员信息
-      isCollapse: false, //控制选项栏收起与展示
+      isCollapse: false, //控制菜单栏收起与展示
       isUnfold: false, //控制个人信息弹窗展开和收起
       arrow: true, //控制箭头翻转
-      activePath: "", //保存激活路由
     };
   },
   created() {
     this.getMenuList();
     this.managerInfo = this.$store.state.managerInfo;
-    this.activePath = this.$store.state.activePath;
   },
   methods: {
     // 触发个人信息展开和收起
@@ -146,7 +159,7 @@ export default {
         return this.$message.error("获取菜单数据失败！");
       }
       this.menulist = res.data;
-      console.log(res);
+      // console.log(res);
     },
     // 触发菜单展开收起
     toggleCollapse() {
@@ -155,7 +168,6 @@ export default {
     // 保存激活路径
     saveNavState(path) {
       this.$store.commit("updateActivePath", path);
-      this.activePath = path;
     },
     // 退出登录
     logout() {

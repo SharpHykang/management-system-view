@@ -1,9 +1,9 @@
 <template>
   <!-- 头部 -->
-  <div class="context">
+  <div class="content">
     <!-- 面包屑导航栏 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>首页</el-breadcrumb-item>
       <el-breadcrumb-item>个人中心</el-breadcrumb-item>
     </el-breadcrumb>
     <!-- 卡片视图 -->
@@ -60,7 +60,7 @@
         <el-descriptions-item>
           <template slot="label">
             <i class="el-icon-mobile-phone"></i>
-            手机号码
+            电话
           </template>
           {{ managerInfo.phone }}
         </el-descriptions-item>
@@ -74,9 +74,23 @@
         <el-descriptions-item>
           <template slot="label">
             <i class="el-icon-office-building"></i>
-            角色ID
+            角色
           </template>
-          {{ managerInfo.roleId }}
+          {{ managerInfo.roleName }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template slot="label">
+            <i class="el-icon-office-building"></i>
+            角色描述
+          </template>
+          {{ managerInfo.roleDescription }}
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template slot="label">
+            <i class="el-icon-date"></i>
+            更新日期
+          </template>
+          {{ managerInfo.updateTime | dateFormat }}
         </el-descriptions-item>
         <el-descriptions-item>
           <template slot="label">
@@ -90,6 +104,7 @@
   </div>
 </template>
 <script>
+import { clearActivePath } from "../common/common.js";
 export default {
   name: "PersonalCenter",
   data() {
@@ -98,6 +113,7 @@ export default {
     };
   },
   created() {
+    clearActivePath();
     this.managerInfo = this.$store.state.managerInfo;
   },
 };

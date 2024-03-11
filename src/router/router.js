@@ -9,6 +9,9 @@ const Login = () => import(/* webpackChunkName: "Login_Home_PersonalCenter" */ '
 const Home = () => import(/* webpackChunkName: "Login_Home_PersonalCenter" */ '../components/Home.vue')
 const PersonalCenter = () => import(/* webpackChunkName: "Login_Home_PersonalCenter" */ '../components/PersonalCenter.vue')
 
+// 第二组
+const Managers = () => import(/* webpackChunkName: "Managers" */ '../views/manager/Managers.vue')
+
 const routes = [
   { path: "/", redirect: "/login" },
   { path: "/login", component: Login },
@@ -18,6 +21,7 @@ const routes = [
     component: Home,
     children: [
       { path: "/PersonalCenter", component: PersonalCenter },
+      { path: "/Managers", component: Managers },
     ]
   }
 ]

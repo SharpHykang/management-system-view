@@ -19,6 +19,17 @@ import {
     Descriptions,
     DescriptionsItem,
     Tag,
+    Col,
+    Row,
+    Table,
+    TableColumn,
+    Switch,
+    Tooltip,
+    Pagination,
+    Dialog,
+    Select,
+    Option,
+    MessageBox,
 } from "element-ui"
 
 Vue.use(Button)
@@ -39,7 +50,20 @@ Vue.use(Card)
 Vue.use(Descriptions)
 Vue.use(DescriptionsItem)
 Vue.use(Tag)
+Vue.use(Col)
+Vue.use(Row)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Switch)
+Vue.use(Tooltip)
+Vue.use(Pagination)
+Vue.use(Dialog)
+Vue.use(Select)
+Vue.use(Option)
 
 
 // 挂载信息提示组件
 Vue.prototype.$message = Message;
+
+// 挂载弹窗提示组件
+Vue.prototype.$confirm = MessageBox.confirm;
