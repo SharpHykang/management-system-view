@@ -30,6 +30,9 @@ import {
     Select,
     Option,
     MessageBox,
+    Tree,
+    Popover,
+    Cascader,
 } from "element-ui"
 
 Vue.use(Button)
@@ -60,6 +63,10 @@ Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(Select)
 Vue.use(Option)
+Vue.use(Tree)
+Vue.use(Popover)
+Vue.use(Cascader)
+
 
 
 // 挂载信息提示组件

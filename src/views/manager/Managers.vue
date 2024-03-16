@@ -13,7 +13,8 @@
           <el-input
             placeholder="请输入用户名"
             v-model="queryInfo.username"
-            class="input-with-select"
+            clearable
+            @clear="getManagerByPage()"
           >
             <el-button
               slot="append"
@@ -29,12 +30,7 @@
         </el-col>
       </el-row>
       <!-- 表格区域 -->
-      <el-table
-        class="table-custom"
-        :data="managerList"
-        :stripe="true"
-        :border="true"
-      >
+      <el-table :data="managerList" :stripe="true" :border="true">
         <el-table-column type="index" label="#"></el-table-column>
         <el-table-column prop="username" label="用户名"></el-table-column>
         <el-table-column prop="email" label="邮箱"> </el-table-column>
@@ -58,9 +54,14 @@
             </el-switch>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="180px">
+        <el-table-column label="操作" width="180px" align="center">
           <template v-slot="scope">
-            <el-tooltip content="编辑" placement="top">
+            <el-tooltip
+              effect="dark"
+              :enterable="false"
+              content="编辑"
+              placement="top"
+            >
               <el-button
                 type="primary"
                 icon="el-icon-edit"
@@ -69,7 +70,12 @@
                 round
               ></el-button>
             </el-tooltip>
-            <el-tooltip content="删除" placement="top">
+            <el-tooltip
+              effect="dark"
+              :enterable="false"
+              content="删除"
+              placement="top"
+            >
               <el-button
                 type="danger"
                 icon="el-icon-delete"
@@ -78,7 +84,12 @@
                 round
               ></el-button>
             </el-tooltip>
-            <el-tooltip content="角色分配" placement="top">
+            <el-tooltip
+              effect="dark"
+              :enterable="false"
+              content="角色分配"
+              placement="top"
+            >
               <el-button
                 type="warning"
                 icon="el-icon-setting"
@@ -385,6 +396,7 @@ export default {
       });
       if (res.code !== 200) {
         this.managerList = [];
+        this.total = 0;
         return this.$message.error("未查到管理员数据！");
       }
       this.managerList = res.data.data;

@@ -108,7 +108,7 @@ export default {
           this.$router.push("/home");
         })
         .catch((err) => {
-          this.$message.err(err);
+          this.$message.error(err);
         });
     },
     // 重置

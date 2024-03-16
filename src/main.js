@@ -14,10 +14,10 @@ import './plugins/element.js'
 import './assets/css/global.css'
 
 
-/* 导入字体图标样式 */
-import './assets/fonts/iconfont.css'
+// 引入项目下面生成的 symbol 代码：
+import './assets/fonts/iconfont.js'
 
-/* 导入时间过滤器 */
+// 导入时间过滤器
 import './common/dateFormat.js'
 
 Vue.config.productionTip = false

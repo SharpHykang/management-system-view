@@ -10,7 +10,12 @@ const Home = () => import(/* webpackChunkName: "Login_Home_PersonalCenter" */ '.
 const PersonalCenter = () => import(/* webpackChunkName: "Login_Home_PersonalCenter" */ '../components/PersonalCenter.vue')
 
 // 第二组
-const Managers = () => import(/* webpackChunkName: "Managers" */ '../views/manager/Managers.vue')
+const Managers = () => import(/* webpackChunkName: "Managers_Rights_Roles" */ '../views/manager/Managers.vue')
+const Rights = () => import(/* webpackChunkName: "Managers_Rights_Roles" */ '../views/power/Rights.vue')
+const Roles = () => import(/* webpackChunkName: "Managers_Rights_Roles" */ '../views/power/Roles.vue')
+
+// 第三组
+const Orders=()=>import(/* webpackChunkName: "Orders" */ '../views/order/Orders.vue')
 
 const routes = [
   { path: "/", redirect: "/login" },
@@ -20,8 +25,11 @@ const routes = [
     redirect: "/PersonalCenter",
     component: Home,
     children: [
-      { path: "/PersonalCenter", component: PersonalCenter },
-      { path: "/Managers", component: Managers },
+      { path: "/personalCenter", component: PersonalCenter },
+      { path: "/managers", component: Managers },
+      { path: "/rights", component: Rights },
+      { path: "/roles", component: Roles },
+      { path: "/orders", component: Orders },
     ]
   }
 ]

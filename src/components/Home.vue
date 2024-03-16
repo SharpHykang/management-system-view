@@ -12,7 +12,7 @@
               $message.error(err);
             })
           "
-          >狗多多</span
+          >拼夕夕</span
         >
         <span>|</span>
         <span>后台管理系统</span>
@@ -95,7 +95,10 @@
           >
             <!-- 一级菜单模版 -->
             <template slot="title">
-              <i :class="iconArr[item.permissionId]"></i>
+              <svg class="icon" color="#979797">
+                <use :xlink:href="'#' + iconArr[item.permissionId]"></use>
+              </svg>
+              <!-- <i :class="iconArr[item.permissionId]"></i> -->
               <span>{{ item.name }}</span>
             </template>
             <!-- 二级菜单循环 -->
@@ -130,11 +133,11 @@ export default {
     return {
       menulist: [], // 左侧菜单
       iconArr: {
-        125: "iconfont icon-user",
-        103: "iconfont icon-tijikongjian",
-        101: "iconfont icon-shangpin",
-        102: "iconfont icon-danju",
-        145: "iconfont icon-baobiao",
+        125: "icon-yonghuguanli",
+        103: "icon-quanxianguanli",
+        101: "icon-shangpinguanli",
+        102: "icon-dingdanguanli",
+        145: "icon-shujutongji",
       },
       managerInfo: {}, //管理员信息
       isCollapse: false, //控制菜单栏收起与展示
@@ -344,9 +347,6 @@ export default {
   cursor: pointer;
   letter-spacing: 3px;
 }
-.iconfont {
-  margin-right: 10px;
-}
 .account-email,
 .account-phone,
 .account-status {
@@ -362,5 +362,13 @@ export default {
   letter-spacing: 10px;
   background-color: #70cca2;
   color: #fff;
+}
+.icon {
+  width: 1.2em;
+  height: 1.2em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  margin-right: 10px;
 }
 </style>
