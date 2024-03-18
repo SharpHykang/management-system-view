@@ -15,12 +15,12 @@
             placeholder="请输入订单编号"
             v-model="queryInfo.orderNumber"
             clearable
-            @clear="getOrderList()"
+            @clear="getOrder()"
           >
             <el-button
               slot="append"
               icon="el-icon-search"
-              @click="getOrderList()"
+              @click="getOrder()"
             ></el-button>
           </el-input>
         </el-col>
@@ -29,7 +29,7 @@
             v-model="queryInfo.isSend"
             placeholder="请选择发货状态"
             clearable
-            @change="getOrderList()"
+            @change="getOrder()"
           >
             <el-option label="已发货" value="1"></el-option>
             <el-option label="待发货" value="0"></el-option>
@@ -40,7 +40,7 @@
             v-model="queryInfo.payStatus"
             placeholder="请选择付款状态"
             clearable
-            @change="getOrderList()"
+            @change="getOrder()"
           >
             <el-option label="已付款" value="1"></el-option>
             <el-option label="待付款" value="0"></el-option>
@@ -424,6 +424,12 @@ export default {
     this.getOrderList();
   },
   methods: {
+    //点击搜索、 输入框清空、选择发货状态、付款状态时执行
+    getOrder() {
+      this.queryInfo.pageNum = 1;
+      this.queryInfo.pageSize = 5;
+      this.getOrderList();
+    },
     async getOrderList() {
       const { data: res } = await this.$http.get(`orders/getOrderByPage`, {
         params: this.queryInfo,

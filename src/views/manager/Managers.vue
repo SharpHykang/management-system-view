@@ -14,12 +14,12 @@
             placeholder="请输入用户名"
             v-model="queryInfo.username"
             clearable
-            @clear="getManagerByPage()"
+            @clear="getManager()"
           >
             <el-button
               slot="append"
               icon="el-icon-search"
-              @click="getManagerByPage()"
+              @click="getManager()"
             ></el-button>
           </el-input>
         </el-col>
@@ -389,6 +389,12 @@ export default {
     this.getManagerByPage();
   },
   methods: {
+    // 点击搜索和输入框清空按钮
+    getManager() {
+      this.queryInfo.pageNum = 1;
+      this.queryInfo.pageSize = 2;
+      this.getManagerByPage();
+    },
     // 分页查询管理员数据
     async getManagerByPage() {
       const { data: res } = await this.$http.get(`managers/getManagerByPage`, {
