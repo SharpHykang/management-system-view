@@ -75,7 +75,7 @@
             <el-tooltip
               effect="dark"
               :enterable="false"
-              content="编辑"
+              content="编辑角色"
               placement="top"
             >
               <el-button
@@ -89,7 +89,7 @@
             <el-tooltip
               effect="dark"
               :enterable="false"
-              content="删除"
+              content="删除角色"
               placement="top"
             >
               <el-button

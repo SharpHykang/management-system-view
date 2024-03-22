@@ -49,165 +49,174 @@
       </el-row>
 
       <!--订单列表-->
-      <el-table :data="orderList" :border="true" :stripe="true">
-        <!-- 订单下明细的商品列表-->
-        <el-table-column label="明细" type="expand" width="50px">
-          <template v-slot="scope">
-            <el-table
-              class="el-table-margin"
-              :data="scope.row.goods"
-              :border="true"
-              :stripe="true"
-            >
-              <el-table-column
-                label="商品ID"
-                prop="goodsId"
-                width="100px"
-              ></el-table-column>
-              <el-table-column
-                label="商品图片"
-                width="100px"
-                header-align="center"
-                align="center"
+      <el-row>
+        <el-table :data="orderList" :border="true" :stripe="true">
+          <!-- 订单下明细的商品列表-->
+          <el-table-column label="明细" type="expand" width="50px">
+            <template v-slot="scope">
+              <el-table
+                class="el-table-margin"
+                :data="scope.row.goods"
+                :border="true"
+                :stripe="true"
               >
-                <template>
-                  <el-popover placement="top-start" trigger="hover">
-                    <img
-                      src="../../assets/img/ikun.jpg"
-                      style="width: 150px; height: 150px"
-                    />
-                    <img
-                      src="../../assets/img/ikun.jpg"
-                      slot="reference"
-                      style="width: 50px; height: 50px"
-                    />
-                  </el-popover>
-                </template>
-              </el-table-column>
-              <el-table-column
-                label="商品名称"
-                prop="goodsName"
-              ></el-table-column>
-              <el-table-column
-                label="商品重量(KG)"
-                prop="goodsWeight"
-                width="120px"
-              ></el-table-column>
-              <el-table-column
-                label="商品数量(个)"
-                prop="goodsNumber"
-                width="120px"
-              ></el-table-column>
-              <el-table-column
-                label="商品价格($)"
-                prop="goodsPrice"
-                width="120px"
-              ></el-table-column>
-              <el-table-column
-                label="商品总价($)"
-                prop="goodsTotalPrice"
-                width="120px"
-              ></el-table-column>
-            </el-table>
-          </template>
-        </el-table-column>
-        <el-table-column
-          label="序号"
-          type="index"
-          width="50px"
-        ></el-table-column>
-        <el-table-column label="订单编号" prop="orderNumber"></el-table-column>
-        <el-table-column
-          label="订单价格($)"
-          prop="orderPrice"
-          width="150px"
-        ></el-table-column>
-        <el-table-column label="支付方式" width="120px">
-          <template slot-scope="scope">
-            <svg class="icon" v-if="scope.row.orderPay === 0">
-              <use xlink:href="#icon-weifukuan"></use>
-            </svg>
-            <svg class="icon" v-if="scope.row.orderPay === 1">
-              <use xlink:href="#icon-zhifubaozhifu"></use>
-            </svg>
-            <svg class="icon" v-if="scope.row.orderPay === 2">
-              <use xlink:href="#icon-weixinzhifu"></use>
-            </svg>
-            <svg class="icon" v-if="scope.row.orderPay === 3" font-size="18px">
-              <use xlink:href="#icon-yinhangkazhifu"></use>
-            </svg>
-          </template>
-        </el-table-column>
-        <el-table-column label="是否付款" width="120px">
-          <template slot-scope="scope">
-            <svg class="icon" v-if="scope.row.payStatus">
-              <use xlink:href="#icon-yifukuan"></use>
-            </svg>
-            <svg class="icon" v-else>
-              <use xlink:href="#icon-weifukuan"></use>
-            </svg>
-          </template>
-        </el-table-column>
-        <el-table-column label="是否发货" width="120px">
-          <template slot-scope="scope">
-            <el-tag size="mini" type="success" v-if="scope.row.isSend"
-              >已发货</el-tag
-            >
-            <el-tag size="mini" type="danger" v-else>待发货</el-tag>
-          </template>
-        </el-table-column>
-        <el-table-column label="下单时间">
-          <template slot-scope="scope">
-            {{ scope.row.createTime | dateFormat }}
-          </template>
-        </el-table-column>
-        <el-table-column label="操作" align="center">
-          <template slot-scope="scope">
-            <el-tooltip
-              effect="dark"
-              content="订单详情"
-              placement="top"
-              :enterable="false"
-            >
-              <el-button
-                type="success"
-                size="small"
-                icon="el-icon-more"
-                @click="showOrderDetailDialog(scope.row.orderId)"
-                round
-              ></el-button>
-            </el-tooltip>
-            <el-tooltip
-              effect="dark"
-              content="修改收货地址"
-              placement="top"
-              :enterable="false"
-            >
-              <el-button
-                type="primary"
-                size="small"
-                icon="el-icon-edit"
-                @click="showEditAddressDialog(scope.row.orderId)"
-                round
-              ></el-button>
-            </el-tooltip>
-            <el-tooltip
-              effect="dark"
-              content="查看物流信息"
-              placement="top"
-              :enterable="false"
-            >
-              <el-button
-                type="warning"
-                size="small"
-                icon="el-icon-location"
-                @click="showProgessDialog()"
-                round
-              ></el-button>
-            </el-tooltip>
-          </template>
-        </el-table-column>
-      </el-table>
+                <el-table-column
+                  label="商品ID"
+                  prop="goodsId"
+                  width="100px"
+                ></el-table-column>
+                <el-table-column
+                  label="商品图片"
+                  width="100px"
+                  header-align="center"
+                  align="center"
+                >
+                  <template>
+                    <el-popover placement="top-start" trigger="hover">
+                      <img
+                        src="../../assets/img/ikun.jpg"
+                        style="width: 150px; height: 150px"
+                      />
+                      <img
+                        src="../../assets/img/ikun.jpg"
+                        slot="reference"
+                        style="width: 50px; height: 50px"
+                      />
+                    </el-popover>
+                  </template>
+                </el-table-column>
+                <el-table-column
+                  label="商品名称"
+                  prop="goodsName"
+                ></el-table-column>
+                <el-table-column
+                  label="商品重量(KG)"
+                  prop="goodsWeight"
+                  width="120px"
+                ></el-table-column>
+                <el-table-column
+                  label="商品数量(个)"
+                  prop="goodsNumber"
+                  width="120px"
+                ></el-table-column>
+                <el-table-column
+                  label="商品价格($)"
+                  prop="goodsPrice"
+                  width="120px"
+                ></el-table-column>
+                <el-table-column
+                  label="商品总价($)"
+                  prop="goodsTotalPrice"
+                  width="120px"
+                ></el-table-column>
+              </el-table>
+            </template>
+          </el-table-column>
+          <el-table-column
+            label="序号"
+            type="index"
+            width="50px"
+          ></el-table-column>
+          <el-table-column
+            label="订单编号"
+            prop="orderNumber"
+          ></el-table-column>
+          <el-table-column
+            label="订单价格($)"
+            prop="orderPrice"
+            width="150px"
+          ></el-table-column>
+          <el-table-column label="支付方式" width="120px">
+            <template slot-scope="scope">
+              <svg class="icon" v-if="scope.row.orderPay === 0">
+                <use xlink:href="#icon-weifukuan"></use>
+              </svg>
+              <svg class="icon" v-if="scope.row.orderPay === 1">
+                <use xlink:href="#icon-zhifubaozhifu"></use>
+              </svg>
+              <svg class="icon" v-if="scope.row.orderPay === 2">
+                <use xlink:href="#icon-weixinzhifu"></use>
+              </svg>
+              <svg
+                class="icon"
+                v-if="scope.row.orderPay === 3"
+                font-size="18px"
+              >
+                <use xlink:href="#icon-yinhangkazhifu"></use>
+              </svg>
+            </template>
+          </el-table-column>
+          <el-table-column label="是否付款" width="120px">
+            <template slot-scope="scope">
+              <svg class="icon" v-if="scope.row.payStatus">
+                <use xlink:href="#icon-yifukuan"></use>
+              </svg>
+              <svg class="icon" v-else>
+                <use xlink:href="#icon-weifukuan"></use>
+              </svg>
+            </template>
+          </el-table-column>
+          <el-table-column label="是否发货" width="120px">
+            <template slot-scope="scope">
+              <el-tag size="mini" type="success" v-if="scope.row.isSend"
+                >已发货</el-tag
+              >
+              <el-tag size="mini" type="danger" v-else>待发货</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="下单时间">
+            <template slot-scope="scope">
+              {{ scope.row.createTime | dateFormat }}
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" align="center">
+            <template slot-scope="scope">
+              <el-tooltip
+                effect="dark"
+                content="订单详情"
+                placement="top"
+                :enterable="false"
+              >
+                <el-button
+                  type="success"
+                  size="small"
+                  icon="el-icon-more"
+                  @click="showOrderDetailDialog(scope.row.orderId)"
+                  round
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip
+                effect="dark"
+                content="修改订单"
+                placement="top"
+                :enterable="false"
+              >
+                <el-button
+                  type="primary"
+                  size="small"
+                  icon="el-icon-edit"
+                  @click="showEditAddressDialog(scope.row.orderId)"
+                  round
+                ></el-button>
+              </el-tooltip>
+              <el-tooltip
+                effect="dark"
+                content="查看物流"
+                placement="top"
+                :enterable="false"
+              >
+                <el-button
+                  type="warning"
+                  size="small"
+                  icon="el-icon-location"
+                  @click="showProgessDialog()"
+                  round
+                ></el-button>
+              </el-tooltip>
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-row>
 
       <!-- 分页-->
       <el-pagination
@@ -231,7 +240,7 @@
       :close-on-click-modal="false"
       @close="orderDetailDialogClose"
     >
-      <el-form :model="orderDetail" label-width="120px">
+      <el-form :model="orderDetail" label-width="120px" ref="orderDetailRef">
         <el-form-item label="订单ID">
           <el-input v-model="orderDetail.orderId" :disabled="true"></el-input>
         </el-form-item>
@@ -247,11 +256,11 @@
             :disabled="true"
           ></el-input>
         </el-form-item>
-        <el-form-item label="订单价格($)">
-          <el-input v-model="orderDetail.orderPay" :disabled="true"></el-input>
+        <el-form-item label="支付状态">
+          <el-input v-model="orderPay" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="是否发货">
-          <el-input v-model="orderDetail.isSend" :disabled="true"></el-input>
+          <el-input v-model="isSend" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="发票内容">
           <el-input
@@ -284,7 +293,7 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="支付状态">
-          <el-input v-model="orderDetail.payStatus" :disabled="true"></el-input>
+          <el-input v-model="payStatus" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="订单创建时间">
           <el-input
@@ -423,6 +432,35 @@ export default {
   created() {
     this.getOrderList();
   },
+  computed: {
+    isSend: function () {
+      return this.orderDetail.isSend ? "已发货" : "待发货";
+    },
+    payStatus: function () {
+      return this.orderDetail.payStatus ? "已支付" : "待支付";
+    },
+    orderPay: function () {
+      let orderPay;
+      switch (this.orderDetail.orderPay) {
+        case 0:
+          orderPay = "待支付";
+          break;
+        case 1:
+          orderPay = "支付宝";
+          break;
+        case 2:
+          orderPay = "微信";
+          break;
+        case 3:
+          orderPay = "银联闪付";
+          break;
+        default:
+          orderPay = "";
+          break;
+      }
+      return orderPay;
+    },
+  },
   methods: {
     //点击搜索、 输入框清空、选择发货状态、付款状态时执行
     getOrder() {
@@ -459,42 +497,6 @@ export default {
       showOrderDetail
         .then((res) => {
           let orderDetail = this.orderDetail;
-          switch (orderDetail.isSend) {
-            case false:
-              orderDetail.isSend = "待发货";
-              break;
-            case true:
-              orderDetail.isSend = "已发货";
-              break;
-            default:
-              break;
-          }
-          switch (orderDetail.payStatus) {
-            case false:
-              orderDetail.payStatus = "待支付";
-              break;
-            case true:
-              orderDetail.payStatus = "已支付";
-              break;
-            default:
-              break;
-          }
-          switch (orderDetail.orderPay) {
-            case 0:
-              orderDetail.orderPay = "待支付";
-              break;
-            case 1:
-              orderDetail.orderPay = "支付宝";
-              break;
-            case 2:
-              orderDetail.orderPay = "微信";
-              break;
-            case 3:
-              orderDetail.orderPay = "银联闪付";
-              break;
-            default:
-              break;
-          }
           // 手动调用过滤器的定义方法
           orderDetail.createTime = this.$options.filters["dateFormat"](
             orderDetail.createTime
@@ -510,8 +512,7 @@ export default {
     },
     // 订单详情关闭
     orderDetailDialogClose() {
-      this.consigneeAddressCounty = "";
-      this.orderDetail = {};
+      this.$refs.orderDetailRef.resetFields();
     },
     // 获取订单详情
     async getOrderDetail(orderId) {
@@ -543,13 +544,11 @@ export default {
     },
     // 监听修改地址对话框的关闭事件
     editAddressDialogClosed() {
-      this.consigneeAddressCounty = "";
-      this.orderDetail = {};
+      this.$refs.editAddressFormRef.resetFields();
     },
     // 修改收货信息
     editAddress() {
       this.$refs.editAddressFormRef.validate(async (valid) => {
-        debugger;
         if (!valid) {
           return;
         }

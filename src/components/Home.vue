@@ -12,7 +12,7 @@
               $message.error(err);
             })
           "
-          >拼夕夕</span
+          >SharpHykang</span
         >
         <span>|</span>
         <span>后台管理系统</span>
@@ -235,7 +235,6 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
   position: relative;
   z-index: 0;
   background: #c8ebdf;
@@ -284,6 +283,12 @@ export default {
   transform: rotateZ(0deg);
 }
 
+.header-left > .headSculpture,
+.username,
+.el-icon-arrow-down {
+  cursor: pointer;
+}
+
 /* 个人信息弹窗样式 */
 .dropdown-content {
   width: 100%;
@@ -315,6 +320,7 @@ export default {
   width: 100%;
   height: 60px;
   display: flex;
+  cursor: pointer;
   // background: #fff;
 }
 .basic-information > .headSculpture img {
@@ -362,6 +368,7 @@ export default {
   letter-spacing: 10px;
   background-color: #70cca2;
   color: #fff;
+  cursor: pointer;
 }
 .icon {
   width: 1.2em;

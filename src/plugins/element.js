@@ -33,6 +33,9 @@ import {
     Tree,
     Popover,
     Cascader,
+    Alert,
+    Tabs,
+    TabPane,
 } from "element-ui"
 
 Vue.use(Button)
@@ -66,8 +69,9 @@ Vue.use(Option)
 Vue.use(Tree)
 Vue.use(Popover)
 Vue.use(Cascader)
-
-
+Vue.use(Alert)
+Vue.use(Tabs)
+Vue.use(TabPane)
 
 // 挂载信息提示组件
 Vue.prototype.$message = Message;

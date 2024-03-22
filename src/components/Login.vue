@@ -105,7 +105,7 @@ export default {
         .dispatch("findManagerById")
         .then((res) => {
           // findManagerById异步执行完后的回调：此时数据已存入Vuex，跳转就能渲染
-          this.$router.push("/home");
+          this.$router.push("/PersonalCenter");
         })
         .catch((err) => {
           this.$message.error(err);

@@ -19,7 +19,7 @@
         ></el-table-column>
         <el-table-column label="权限方法名" prop="apiAction"></el-table-column>
         <el-table-column label="权限所属路径" prop="apiPath"></el-table-column>
-        <el-table-column label="权限等级" prop="level" align="center">
+        <el-table-column label="权限能级" prop="level" align="center">
           <template v-slot="scope">
             <el-tag v-if="scope.row.level === 0">一级</el-tag>
             <el-tag v-if="scope.row.level === 1" type="success">二级</el-tag>

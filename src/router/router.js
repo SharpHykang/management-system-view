@@ -14,8 +14,17 @@ const Managers = () => import(/* webpackChunkName: "Managers_Rights_Roles" */ '.
 const Rights = () => import(/* webpackChunkName: "Managers_Rights_Roles" */ '../views/power/Rights.vue')
 const Roles = () => import(/* webpackChunkName: "Managers_Rights_Roles" */ '../views/power/Roles.vue')
 
-// 第三组
+// 第三组：订单管理
 const Orders=()=>import(/* webpackChunkName: "Orders" */ '../views/order/Orders.vue')
+
+
+// 第四组：商品管理
+const goodsList=()=>import(/* webpackChunkName: "goodsList" */ '../views/goods/List.vue')
+
+
+// 第五组：商品参数管理、商品分组管理
+const goodsParams=()=>import(/* webpackChunkName: "goodsParams_goodsCate" */ '../views/goods/Params.vue')
+const goodsCate=()=>import(/* webpackChunkName: "goodsParams_goodsCate" */ '../views/goods/Cate.vue')
 
 const routes = [
   { path: "/", redirect: "/login" },
@@ -30,6 +39,9 @@ const routes = [
       { path: "/rights", component: Rights },
       { path: "/roles", component: Roles },
       { path: "/orders", component: Orders },
+      { path: "/goods", component: goodsList },
+      { path: "/params", component: goodsParams },
+      { path: "/categories", component: goodsCate },
     ]
   }
 ]
