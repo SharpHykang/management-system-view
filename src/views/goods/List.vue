@@ -49,7 +49,7 @@
           </el-select>
         </el-col>
         <el-col :span="2">
-          <el-button type="primary" @click="addGoods">添加商品</el-button>
+          <el-button type="primary" @click="addGoods()">添加商品</el-button>
         </el-col>
       </el-row>
       <!-- 表格区域 -->
@@ -343,11 +343,13 @@ export default {
     },
     /* 点击添加：跳转到添加商品页面 */
     addGoods() {
-      this.$router.push("/goods/add");
+      // this.$router.push("/goods/add");
+      this.$message.error("该功能未实现！");
     },
     /* 显示编辑弹窗 */
     editGoods(id) {
-      this.$router.push("/goods/edit/" + id);
+      // this.$router.push("/goods/edit/" + id);
+      this.$message.error("该功能未实现！");
     },
     /* 点击删除按钮 */
     removeById(goodsId) {
