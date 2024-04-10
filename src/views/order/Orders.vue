@@ -359,7 +359,7 @@
     </el-dialog>
 
     <!-- 查看物流进度的对话框-->
-    <el-dialog title="物流进度" :visible.sync="progessVisible" width="50%">
+    <!-- <el-dialog title="物流进度" :visible.sync="progessVisible" width="50%">
       <el-timeline>
         <el-timeline-item
           v-for="(activity, index) in progressInfo"
@@ -369,7 +369,7 @@
           {{ activity.context }}
         </el-timeline-item>
       </el-timeline>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
   
@@ -425,8 +425,8 @@ export default {
       consigneeAddressCounty: "", //级联选择选中城市
 
       // 物流进度对话框
-      progessVisible: false,
-      progressInfo: [],
+      // progessVisible: false,
+      // progressInfo: [],
     };
   },
   created() {
@@ -573,13 +573,14 @@ export default {
     },
     // 显示物流进度对话框
     async showProgessDialog() {
-      const { data: res } = await this.$http.get("/kuaidi/815294206237577");
-      if (res.meta.status !== 200) {
-        return this.$message.error("获取物流进度失败");
-      }
-      this.progressInfo = res.data;
+      // const { data: res } = await this.$http.get("/kuaidi/815294206237577");
+      // if (res.meta.status !== 200) {
+      //   return this.$message.error("获取物流进度失败");
+      // }
+      // this.progressInfo = res.data;
 
-      this.progessVisible = true;
+      // this.progessVisible = true;
+      this.$message.error("显示物流对话框失败！");
     },
   },
 };

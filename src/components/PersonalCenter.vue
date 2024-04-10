@@ -19,7 +19,7 @@
             <i class="el-icon-picture-outline"></i>
             头像
           </template>
-          <img class="img" src="../assets/img/messi2.jpg" alt="头像" />
+          <img class="img" src="../assets/img/Neymar2.jpg" alt="头像" />
         </el-descriptions-item>
         <el-descriptions-item>
           <template slot="label">

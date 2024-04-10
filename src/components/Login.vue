@@ -4,7 +4,7 @@
     <div class="login_center">
       <!-- 头像区域 -->
       <div class="login_headPortrait">
-        <img src="../assets/img/messi2.jpg" />
+        <img src="../assets/img/Neymar2.jpg" />
       </div>
       <!-- 登录表单区域 -->
       <el-form

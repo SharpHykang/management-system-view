@@ -43,7 +43,7 @@
             clearable
             @change="getGoods()"
           >
-            <el-option label="待付款" value="0"></el-option>
+            <el-option label="待审核" value="0"></el-option>
             <el-option label="审核中" value="1"></el-option>
             <el-option label="已审核" value="2"></el-option>
           </el-select>
@@ -344,12 +344,12 @@ export default {
     /* 点击添加：跳转到添加商品页面 */
     addGoods() {
       // this.$router.push("/goods/add");
-      this.$message.error("该功能未实现！");
+      this.$message.error("显示添加商品对话框失败！");
     },
     /* 显示编辑弹窗 */
     editGoods(id) {
       // this.$router.push("/goods/edit/" + id);
-      this.$message.error("该功能未实现！");
+      this.$message.error("显示编辑商品对话框失败！");
     },
     /* 点击删除按钮 */
     removeById(goodsId) {

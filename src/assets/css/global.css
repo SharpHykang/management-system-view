@@ -95,3 +95,9 @@ body,
 }
 /* 隐藏下方滚动条 */
 .el-scrollbar__wrap { overflow-x: hidden; }
+
+
+  /*下拉框最后一个显示不完全*/
+.el-select-dropdown__wrap.el-scrollbar__wrap {
+    margin-bottom: 0 !important;
+}

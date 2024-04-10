@@ -3,7 +3,7 @@
   <el-container class="home-page">
     <!-- 头部栏 -->
     <el-header>
-      <!-- 头部栏右边 -->
+      <!-- 头部栏左边 -->
       <div class="header-right">
         <!-- 注意：捕获当前路由 路由到当前路由的错误信息！！！ -->
         <span
@@ -17,11 +17,11 @@
         <span>|</span>
         <span>后台管理系统</span>
       </div>
-      <!-- 头部栏左边 -->
+      <!-- 头部栏右边 -->
       <div class="header-left" @mouseenter="openTap" @mouseleave="openTap">
         <!-- 头像 -->
         <div class="headSculpture">
-          <img src="../assets/img/messi2.jpg" />
+          <img src="../assets/img/Neymar2.jpg" />
         </div>
         <!-- 用户名 -->
         <div class="username">{{ managerInfo.username }}</div>
@@ -309,7 +309,7 @@ export default {
 // 触发等待多久执行
 .dropdown-content-enter,
 .dropdown-content-enter-active {
-  transition-delay: 0.3s;
+  transition-delay: 0s;
 }
 // 触发动态效果
 .dropdown-content-enter,
